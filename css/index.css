@@ -1,0 +1,71 @@
+.logo {
+  text-align: center;
+  margin: 25% 0 12%;
+  color: #569c9c;
+}
+
+.form_i {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5%;
+  position: relative;
+}
+.form_i .ui-input-text {
+  width: 78%;
+  margin: 0 2% 0 0;
+}
+.form_i .form_i_txt {
+  white-space: nowrap;
+  color: #333;
+  width: 18%;
+}
+.form_i .form_i_txt a {
+  font-weight: initial !important;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.form_i .error_prompt {
+  color: red;
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  font-size: 12px;
+  display: none;
+}
+.form_i, .form_i_c {
+  justify-content: center;
+}
+.form_i_radio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.form_i_radio:nth-child(2) {
+  margin-left: 5%;
+}
+
+/*  选择币弹窗*/
+.seleCoinPop {
+  width: 200px;
+  padding-bottom: 5%;
+}
+#popChainList, #popCoinList {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 6%;
+}
+.seleCoinPop p {
+  margin: 3% 0;
+}
+.seleCoinPop li.cur {
+  border: 1px solid #569c9c;
+  color: #569c9c;
+}
+.chain_i, .coin_i {
+  border: 1px solid #eee;
+  padding: 2%;
+  margin-right: 3%;
+  cursor: pointer;
+}

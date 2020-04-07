@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+  <title>支付信息</title>
+  <!--  公-->
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/jui.css">
+  <link href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.css" rel="stylesheet">
+  <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.js"></script>
+
+  <!--  私-->
+  <link rel="stylesheet" href="./css/payMessage.css">
+</head>
+
+<body>
+  <div class="w">
+    <div class="common_head">
+      <i id="back"></i>
+      <p>支付信息</p>
+    </div>
+    <div class="qr_input">
+      <input id="wallet_address" class="common_input" data-role='none' type="text" placeholder="支付钱包地址(您用于支付的钱包地址)">
+      <a id="wallet_qr" class="common_blue">二维码</a>
+    </div>
+    <!--  支付信息确认-->
+    <div class="pay_message_confirm pay_bg">
+      <p class="pay_message_confirm_tit">支付信息确认</p>
+      <ul>
+        <li><p>充值链:</p><span id="chainTxt"></span></li>
+        <li><p>充值币种:</p><span id="coinTxt"></span></li>
+        <li><p>充值数量:</p><span id="numTxt"></span></li>
+      </ul>
+    </div>
+    <!--  充值地址-->
+    <div class="deposit_address pay_bg">
+      <h2>充值地址</h2>
+      <img src="https://d1icd6shlvmxi6.cloudfront.net/gsc/J3JTJT/d3/1d/c9/d31dc977968e4ebe98edd72adef70672/images/支付信息/u148.svg?token=6126f11426e46bb0b316144f01cb5cff3c26bb168e42ef9bfa2c30f9edf6cc7e" alt="">
+      <p>订单有效时间04:38</p>
+      <span>(请按照现实数量进行支付，修改数量将无法到账)</span>
+    </div>
+    <!--  交易id-->
+    <div class="qr_input trading_id">
+      <input id="transaction_id " class="common_input" data-role='none' type="text" placeholder="请等待输入区块链交易ID并点击支付完成">
+      <a id="trading_qr" class="common_blue">二维码</a>
+    </div>
+    <!--  支付完成-->
+    <button type="button" class="common_button" data-role='none' style="margin-top: 8%;">支付完成</button>
+  </div>
+
+  <!--  离开的提示弹窗-->
+  <div id="popupDialog" data-role="popup" data-history="false">
+    <p>如果您正在进行充值，为了您的资产安全，请勿离开此页面</p>
+    <div>
+      <a id="leave" data-rel="back">确认离开</a>
+      <a data-rel="back">取消</a>
+    </div>
+  </div>
+
+  <!--  扫码相关-->
+  <div id="output"></div>
+  <!-- 由于llqrcode.js中写死了id，所以id必须为qr-canvas -->
+  <div id="video_bg" class="video_bg">
+    <div class="video_wrap">
+      <video id="video" muted autoplay playsinline></video>
+      <p class="scanning"></p>
+    </div>
+  </div>
+  <canvas id="qr-canvas" style="display:none;"></canvas>
+
+
+  <script src="./js/deQrcode.js"></script>
+  <script src="./js/scanCode.js"></script>
+  <script src='./js/payMessage.js'></script>
+
+</body>
+</html>

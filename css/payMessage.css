@@ -1,0 +1,71 @@
+.qr_input{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.pay_bg {
+  background: #eee;
+  width: 100%;
+  padding: 5%;
+  border-radius: 15px;
+}
+/*  支付信息确认*/
+.pay_message_confirm {
+  margin-top: 5%;
+}
+.pay_message_confirm_tit {
+  font-size: 16px;
+  margin-bottom: 3%;
+}
+.pay_message_confirm ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+.pay_message_confirm ul li {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  margin-bottom: 2%;
+}
+.pay_message_confirm ul li p {
+  font-size: 14px;
+  margin-right: 5px;
+}
+.pay_message_confirm ul li span {
+  font-size: 14px;
+}
+
+/*  充值地址*/
+.deposit_address {
+  text-align: center;
+  margin-top: 5%;
+}
+.deposit_address img {
+  width: 150px;
+  margin: 3% 0;
+}
+.deposit_address p {
+  font-size: 14px;
+}
+.deposit_address span {
+  font-size: 12px;
+}
+
+/*  交易id*/
+.trading_id {
+  margin-top: 5%;
+}
+
+@media(min-width: 480px) {
+  .w {
+    margin-top: 10%;
+  }
+}
+
+/*  弹窗*/
+#popupDialog {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  padding: .5em;
+}

@@ -1,0 +1,72 @@
+/*  公用*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit !important;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.w {
+  width: 100%;
+  padding: 0 15px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.common_head {
+  font-size: 22px;
+  font-weight: 600;
+  text-align: center;
+  margin: 6% 0;
+  position: relative;
+}
+.common_head i {
+  width: 15px;
+  height: 15px;
+  border: 3px solid;
+  display: block;
+  transform: rotateZ(45deg);
+  border-color: transparent transparent #000 #000;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  margin-top: -7.5px;
+}
+
+.common_blue {
+  color: #569c9c;
+}
+.common_input {
+  width: 80%;
+  border: 1px solid #ddd;
+  height: 35px;
+  font-size: 16px;
+  padding: .4em;
+  border-radius: 6px;
+  text-shadow: 0 1px 0 #f3f3f3;
+  margin-right: 5%;
+}
+.common_button {
+  display: block;
+  margin: 18% auto 0;
+  width: 65%;
+  height: 40px;
+  background: #569c9c;
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
