@@ -16,54 +16,55 @@
   <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-  <div class="w">
-    <h1 class="logo">AuPay</h1>
-    <form action="">
-      <div class="form_i">
-        <input id="depositMoney" class="common_input" data-role='none' type="number" placeholder="请输入充值金额">
-        <div class="form_i_txt"><p>CNY</p></div>
-        <span class="error_prompt">请选择充值金额</span>
-      </div>
-      <div class="form_i">
-        <input id="payType" class="common_input" data-role='none' type="text" placeholder="请选择支付币种" readonly>
-        <div class="form_i_txt">
-          <a id="coinList" data-transition="pop" data-rel="popup" data-position-to="window">币种列表</a>
+  <div data-role="page">
+    <div class="w">
+      <h1 class="logo">AuPay</h1>
+      <form action="">
+        <div class="form_i">
+          <input id="depositMoney" class="common_input" data-role='none' type="number" placeholder="请输入充值金额">
+          <div class="form_i_txt"><p>CNY</p></div>
+          <span class="error_prompt">请选择充值金额</span>
         </div>
-        <span class="error_prompt">请选择币种</span>
-      </div>
-      <div class="form_i">
-        <input id="payNum" class="common_input" data-role='none' type="number" placeholder="支付数量">
-        <div class="form_i_txt">
-          <p>ETH</p>
+        <div class="form_i">
+          <input id="payType" class="common_input" data-role='none' type="text" placeholder="请选择支付币种" readonly>
+          <div class="form_i_txt">
+            <a id="coinList" data-transition="pop" data-rel="popup" data-position-to="window">币种列表</a>
+          </div>
+          <span class="error_prompt">请选择币种</span>
         </div>
-        <span class="error_prompt">请选择支付数量</span>
+        <div class="form_i">
+          <input id="payNum" class="common_input" data-role='none' type="number" placeholder="支付数量">
+          <div class="form_i_txt">
+            <p>ETH</p>
+          </div>
+          <span class="error_prompt">请选择支付数量</span>
+        </div>
+        <div class="form_i form_i_c">
+          <label class="form_i_radio">
+            <input data-role='none' type="radio" name="type_radio" value="wallet">
+            <span>钱包转币</span>
+          </label>
+          <label class="form_i_radio">
+            <input data-role='none' type="radio" name="type_radio" value="exchange">
+            <span>交易所转币</span>
+          </label>
+          <span class="error_prompt">请选择转币方式</span>
+        </div>
+      </form>
+      <button type="button" class="common_button nextStep" data-role='none'>下一步</button>
+    </div>
+  
+    <!--  选择币种列表-->
+    <div id="transitionExample" class="ui-content" data-role="popup" data-history="false" data-theme="a">
+      <a id="closePop" href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+      <div class="seleCoinPop">
+        <p>选择公链</p>
+        <ul id="popChainList"></ul>
+        <p style="margin-top: 10%;">选择币种</p>
+        <ul id="popCoinList"></ul>
       </div>
-      <div class="form_i form_i_c">
-        <label class="form_i_radio">
-          <input data-role='none' type="radio" name="type_radio" value="wallet">
-          <span>钱包转币</span>
-        </label>
-        <label class="form_i_radio">
-          <input data-role='none' type="radio" name="type_radio" value="exchange">
-          <span>交易所转币</span>
-        </label>
-        <span class="error_prompt">请选择转币方式</span>
-      </div>
-    </form>
-    <button type="button" class="common_button nextStep" data-role='none'>下一步</button>
-  </div>
-
-  <!--  选择币种列表-->
-  <div id="transitionExample" class="ui-content" data-role="popup" data-history="false" data-theme="a">
-    <a id="closePop" href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-    <div class="seleCoinPop">
-      <p>选择公链</p>
-      <ul id="popChainList"></ul>
-      <p style="margin-top: 10%;">选择币种</p>
-      <ul id="popCoinList"></ul>
     </div>
   </div>
-
   <script src="js/index.js"></script>
 </body>
 </html>

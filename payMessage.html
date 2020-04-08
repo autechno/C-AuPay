@@ -18,74 +18,75 @@
 </head>
 
 <body>
-  <div class="w">
-    <div class="common_head">
-      <i id="back"></i>
-      <p>支付信息</p>
+  <div data-role="page">
+    <div class="w">
+      <div class="common_head">
+        <i id="back"></i>
+        <p>支付信息</p>
+      </div>
+      <div class="qr_input">
+        <input id="wallet_address" class="common_input" data-role='none' type="text" placeholder="支付钱包地址(您用于支付的钱包地址)">
+        <!--  手机操作-->
+        <a id="wallet_qr" class="common_blue">二维码</a>
+        <!--  电脑操作-->
+        <a id="wallet_qr_pc" href="#wallet_qr_popup" data-rel="popup" data-position-to="window" data-transition="pop" class="common_blue">二维码</a>
+      </div>
+      <!--  支付信息确认-->
+      <div class="pay_message_confirm pay_bg">
+        <p class="pay_message_confirm_tit">支付信息确认</p>
+        <ul>
+          <li><p>充值链:</p><span id="chainTxt"></span></li>
+          <li><p>充值币种:</p><span id="coinTxt"></span></li>
+          <li><p>充值数量:</p><span id="numTxt"></span></li>
+        </ul>
+      </div>
+      <!--  充值地址-->
+      <div class="deposit_address pay_bg">
+        <h2>充值地址</h2>
+        <img src="./img/qr.png" alt="二维码">
+        <p id="pay_time"></p>
+        <span>(请按照现实数量进行支付，修改数量将无法到账)</span>
+      </div>
+      <!--  交易id-->
+      <div class="qr_input trading_id">
+        <input id="transaction_id" class="common_input" data-role='none' type="text" placeholder="请等待输入区块链交易ID并点击支付完成">
+        <a id="trading_qr" class="common_blue">二维码</a>
+        <a id="trading_qr_pc" href="#trading_qr_popup" data-rel="popup" data-position-to="window" data-transition="pop" class="common_blue">二维码</a>
+      </div>
+      <!--  支付完成-->
+      <button id="pay_complete" type="button" class="common_button" data-role='none' style="margin-top: 8%;">支付完成</button>
     </div>
-    <div class="qr_input">
-      <input id="wallet_address" class="common_input" data-role='none' type="text" placeholder="支付钱包地址(您用于支付的钱包地址)">
-      <!--  手机操作-->
-      <a id="wallet_qr" class="common_blue">二维码</a>
-      <!--  电脑操作-->
-      <a id="wallet_qr_pc" href="#wallet_qr_popup" data-rel="popup" data-position-to="window" data-transition="pop" class="common_blue">二维码</a>
+  
+    <!--  离开的提示弹窗-->
+    <div id="popupDialog" data-role="popup" data-history="false">
+      <p>如果您正在进行充值，为了您的资产安全，请勿离开此页面</p>
+      <div>
+        <a id="leave" data-rel="back">确认离开</a>
+        <a data-rel="back">取消</a>
+      </div>
     </div>
-    <!--  支付信息确认-->
-    <div class="pay_message_confirm pay_bg">
-      <p class="pay_message_confirm_tit">支付信息确认</p>
-      <ul>
-        <li><p>充值链:</p><span id="chainTxt"></span></li>
-        <li><p>充值币种:</p><span id="coinTxt"></span></li>
-        <li><p>充值数量:</p><span id="numTxt"></span></li>
-      </ul>
+  
+    <!--  钱包地址二维码弹窗-->
+    <div id="wallet_qr_popup" data-role="popup" data-history="false">
+      <img id="wallet_qr_img" src="" alt="二维码" style="width: 260px;">
     </div>
-    <!--  充值地址-->
-    <div class="deposit_address pay_bg">
-      <h2>充值地址</h2>
-      <img src="./img/qr.png" alt="二维码">
-      <p id="pay_time"></p>
-      <span>(请按照现实数量进行支付，修改数量将无法到账)</span>
+  
+    <!--  钱包地址二维码弹窗-->
+    <div id="trading_qr_popup" data-role="popup" data-history="false">
+      <img id="trading_qr_img" src="" alt="二维码" style="width: 260px;">
     </div>
-    <!--  交易id-->
-    <div class="qr_input trading_id">
-      <input id="transaction_id" class="common_input" data-role='none' type="text" placeholder="请等待输入区块链交易ID并点击支付完成">
-      <a id="trading_qr" class="common_blue">二维码</a>
-      <a id="trading_qr_pc" href="#trading_qr_popup" data-rel="popup" data-position-to="window" data-transition="pop" class="common_blue">二维码</a>
+  
+    <!--  扫码相关-->
+    <div id="output"></div>
+    <div id="video_bg" class="video_bg">
+      <a id="close_qr" href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">图标</a>
+      <div class="video_wrap">
+        <video id="video" muted autoplay playsinline></video>
+        <p class="scanning"></p>
+      </div>
     </div>
-    <!--  支付完成-->
-    <button id="pay_complete" type="button" class="common_button" data-role='none' style="margin-top: 8%;">支付完成</button>
+    <canvas id="qr-canvas" style="display:none;"></canvas>
   </div>
-
-  <!--  离开的提示弹窗-->
-  <div id="popupDialog" data-role="popup" data-history="false">
-    <p>如果您正在进行充值，为了您的资产安全，请勿离开此页面</p>
-    <div>
-      <a id="leave" data-rel="back">确认离开</a>
-      <a data-rel="back">取消</a>
-    </div>
-  </div>
-
-  <!--  钱包地址二维码弹窗-->
-  <div id="wallet_qr_popup" data-role="popup" data-history="false">
-    <img id="wallet_qr_img" src="" alt="二维码" style="width: 260px;">
-  </div>
-
-  <!--  钱包地址二维码弹窗-->
-  <div id="trading_qr_popup" data-role="popup" data-history="false">
-    <img id="trading_qr_img" src="" alt="二维码" style="width: 260px;">
-  </div>
-
-  <!--  扫码相关-->
-  <div id="output"></div>
-  <div id="video_bg" class="video_bg">
-    <a id="close_qr" href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">图标</a>
-    <div class="video_wrap">
-      <video id="video" muted autoplay playsinline></video>
-      <p class="scanning"></p>
-    </div>
-  </div>
-  <canvas id="qr-canvas" style="display:none;"></canvas>
-
 <script src="./js/deQrcode.js"></script>
 <script src="./js/scanCode.js"></script>
 <script src='./js/payMessage.js'></script>
