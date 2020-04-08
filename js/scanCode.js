@@ -109,17 +109,17 @@ const Scan = {
     let devices = navigator.mediaDevices.enumerateDevices().then(that.gotDevices.bind(that))
     
     document.querySelector('#wallet_qr').addEventListener('click', () => {
-      clickInit(that, 'wallet_address')
+      clickInit(that, devices, 'wallet_address')
     })
     
     document.querySelector('#trading_qr').addEventListener('click', () => {
-      clickInit(that, 'transaction_id')
+      clickInit(that, devices, 'transaction_id')
     })
   }
 }
 Scan.init()
 
-function clickInit(that, id) {
+function clickInit(that, devices, id) {
   document.getElementById(id).value = ''
   that.videoElement.style.display = 'block'
   that.videoWrap.style.display = 'flex'
