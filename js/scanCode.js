@@ -120,6 +120,7 @@ const Scan = {
 Scan.init()
 
 function clickInit(that, devices, id) {
+  console.log(id, document.getElementById(id))
   document.getElementById(id).value = ''
   that.videoElement.style.display = 'block'
   that.videoWrap.style.display = 'flex'
@@ -144,6 +145,7 @@ function clickInit(that, devices, id) {
     if (e.indexOf("http") != -1) {
       window.location.href = e + '&token=xxxx'
     } else {
+      console.log(id, 'ididididi')
       document.getElementById(id).value = e
     }
   }
