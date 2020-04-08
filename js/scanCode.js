@@ -107,18 +107,20 @@ const Scan = {
     // 先获取设备列表，方便调用后置摄像头
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices()) return console.log('该设备不支持，或协议不是https')
     let devices = navigator.mediaDevices.enumerateDevices().then(that.gotDevices.bind(that))
-    $('#wallet_qr').addEventListener('click', () => {
-      clickInit(that, '#wallet_address')
+    
+    document.querySelector('#wallet_qr').addEventListener('click', () => {
+      clickInit(that, 'wallet_address')
     })
-    $('#trading_qr').addEventListener('click', () => {
-      clickInit(that, '#transaction_id')
+    
+    document.querySelector('#trading_qr').addEventListener('click', () => {
+      clickInit(that, 'transaction_id')
     })
   }
 }
 Scan.init()
 
 function clickInit(that, id) {
-  $(id).val('')
+  document.getElementById(id).value = ''
   that.videoElement.style.display = 'block'
   that.videoWrap.style.display = 'flex'
   // that.canvasElement.style.display = 'block'
@@ -142,7 +144,7 @@ function clickInit(that, id) {
     if (e.indexOf("http") != -1) {
       window.location.href = e + '&token=xxxx'
     } else {
-      $(id).val(e)
+      document.getElementById(id).value = e
     }
   }
 }
