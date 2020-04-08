@@ -125,6 +125,7 @@ function clickInit(that, id) {
   that.videoWrap.style.display = 'flex'
   // that.canvasElement.style.display = 'block'
   that.videoElement.play()
+  console.log(devices, 'woshi devices')
   devices.then(that.getStream.bind(that)).catch(that.handleError.bind(that))
   that.canvasContext.clearRect(0, 0, 300, 200)
   //结果回调
