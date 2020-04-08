@@ -70,7 +70,25 @@
   padding: .5em;
 }
 
-/*  手机扫码电脑二维码*/
+/*  在电脑上操作，地址在手机上*/
+#wallet_qr_pc, #trading_qr_pc {
+  display: none;
+}
+@media(min-width: 481px) {
+  #wallet_qr_pc, #trading_qr_pc {
+    display: block;
+  }
+}
+
+/*  在手机上操作，地址在电脑上*/
+#trading_qr, #wallet_qr {
+  display: none;
+}
+@media (max-width: 480px) {
+  #trading_qr, #wallet_qr {
+    display: block;
+  }
+}
 #qr-canvas {
   margin: 0px auto;
   max-width: 300px;
