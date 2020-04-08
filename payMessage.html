@@ -15,94 +15,6 @@
 
   <!--  私-->
   <link rel="stylesheet" href="./css/payMessage.css">
-  <script src='./js/payMessage.js'></script>
-  <script>
-    // 支付倒计时  time(毫秒)
-    var payTimes = null
-    window.clearInterval(payTimes)
-    payTime(1586338191000)
-    function payTime(time) {
-      payTimes = setInterval(function() {
-        if (!time) {
-          $('#pay_time').html('支付超时')
-          clearInterval(payTimes)
-          return
-        }
-        $('#pay_time').html(cumulativeTimeM(time))
-      }, 1000)
-    }
-    // 毫秒转时分
-    function cumulativeTimeM(item) {
-      if (!item) {
-        clearInterval(payTimes)
-        return '支付超时'
-      }
-      if (isNaN(item / 1000)) {
-        clearInterval(payTimes)
-        return '支付超时'
-      }
-      if ((item / 1000 - new Date().getTime() / 1000 ) <= 0) {
-        clearInterval(payTimes)
-        return '支付超时'
-      }
-      let m = ''
-      let s = ''
-      const value =  parseInt(item / 1000) - parseInt(new Date().getTime() / 1000)
-      let theTime = parseInt(value) // 秒
-      let middle = 0 // 分
-      if (theTime > 60) {
-        middle = parseInt(theTime / 60)
-        theTime = parseInt(theTime % 60)
-      }
-      s = parseInt(theTime)
-      m = parseInt(middle)
-      if (Number(s) > 58) {
-        m = String(Number(m) + 1).padStart(2, '0')
-        s = '00'
-      } else {
-        s = String(Number(s) + 1).padStart(2, '0')
-      }
-      return '订单有效时间' + m + ':' + s
-    }
-
-    // 支付完成按钮
-    $('#pay_complete').click(function() {
-      var walletVal = $('#wallet_address').val() // 钱包地址框
-      var transactionVal = $('#transaction_id').val() // 交易id框
-      if (!walletVal) return alert('请填写支付钱包地址')
-      if (!transactionVal) return alert('请填写区块链交易ID')
-      // 此处可以提交数据了 然后在跳转页面
-    })
-
-    $('#close_qr').click(function() {
-      $('#video_bg').css('display', 'none')
-    })
-
-    // pc 扫码一系列
-    $('#wallet_qr_pc').click(function() {
-      scoketQr('#wallet_qr_img' , '#wallet_address')
-    })
-    $('#trading_qr_pc').click(function() {
-      scoketQr('#trading_qr_img' , '#transaction_id')
-    })
-    function scoketQr(imgId, inputId) {
-      $.ajax({
-        type: 'GET',
-        url: 'http://192.168.50.162:8086/api/websocket/textpass',
-        success: function(result) {
-          var ws = result.data.wsurl
-          $(imgId).attr('src', result.data.qrcode)
-          websocket = new WebSocket(ws)
-          websocket.onmessage = function (ev) {
-            if(ev.data !== '连接成功') $(inputId).val(ev.data)
-          }
-        },
-        error: function(e){
-          console.log(e, 'oneerr')
-        }
-      })
-    }
-  </script>
 </head>
 
 <body>
@@ -131,7 +43,7 @@
     <div class="deposit_address pay_bg">
       <h2>充值地址</h2>
       <img src="./img/qr.png" alt="二维码">
-      <p id="pay_time">订单有效时间04:38</p>
+      <p id="pay_time"></p>
       <span>(请按照现实数量进行支付，修改数量将无法到账)</span>
     </div>
     <!--  交易id-->
@@ -174,7 +86,95 @@
   </div>
   <canvas id="qr-canvas" style="display:none;"></canvas>
 
-  <script src="./js/deQrcode.js"></script>
-  <script src="./js/scanCode.js"></script>
+<script src="./js/deQrcode.js"></script>
+<script src="./js/scanCode.js"></script>
+<script src='./js/payMessage.js'></script>
+  <script>
+    // 支付倒计时  time(毫秒)
+    var payTimes = null
+    window.clearInterval(payTimes)
+    payTime(1586425475000)
+    function payTime(time) {
+      payTimes = setInterval(function() {
+        if (!time) {
+          $('#pay_time').html('支付超时')
+          clearInterval(payTimes)
+          return
+        }
+        $('#pay_time').html(cumulativeTimeM(time))
+      }, 1000)
+    }
+    // 毫秒转时分
+    function cumulativeTimeM(item) {
+      if (!item) {
+        clearInterval(payTimes)
+        return '支付超时'
+      }
+      if (isNaN(item / 1000)) {
+        clearInterval(payTimes)
+        return '支付超时'
+      }
+      if ((item / 1000 - new Date().getTime() / 1000 ) <= 0) {
+        clearInterval(payTimes)
+        return '支付超时'
+      }
+      let m = ''
+      let s = ''
+      const value =  parseInt(item / 1000) - parseInt(new Date().getTime() / 1000)
+      let theTime = parseInt(value) // 秒
+      let middle = 0 // 分
+      if (theTime > 60) {
+        middle = parseInt(theTime / 60)
+        theTime = parseInt(theTime % 60)
+      }
+      s = parseInt(theTime)
+      m = parseInt(middle)
+      if (Number(s) > 58) {
+        m = String(Number(m) + 1).padStart(2, '0')
+        s = '00'
+      } else {
+        s = String(Number(s) + 1).padStart(2, '0')
+      }
+      return '订单有效时间 ' + m + ':' + s
+    }
+
+    // 支付完成按钮
+    $('#pay_complete').click(function() {
+      var walletVal = $('#wallet_address').val() // 钱包地址框
+      var transactionVal = $('#transaction_id').val() // 交易id框
+      if (!walletVal) return alert('请填写支付钱包地址')
+      if (!transactionVal) return alert('请填写区块链交易ID')
+      // 此处可以提交数据了 然后在跳转页面
+    })
+
+    $('#close_qr').click(function() {
+      $('#video_bg').css('display', 'none')
+    })
+
+    // pc 扫码一系列
+    $('#wallet_qr_pc').click(function() {
+      scoketQr('#wallet_qr_img' , '#wallet_address')
+    })
+    $('#trading_qr_pc').click(function() {
+      scoketQr('#trading_qr_img' , '#transaction_id')
+    })
+    function scoketQr(imgId, inputId) {
+      $.ajax({
+        type: 'GET',
+        url: 'http://192.168.50.162:8086/api/websocket/textpass',
+        success: function(result) {
+          var ws = result.data.wsurl
+          $(imgId).attr('src', result.data.qrcode)
+          websocket = new WebSocket(ws)
+          websocket.onmessage = function (ev) {
+            if(ev.data !== '连接成功') $(inputId).val(ev.data)
+          }
+        },
+        error: function(e){
+          console.log(e, 'oneerr')
+        }
+      })
+    }
+  </script>
 </body>
 </html>
