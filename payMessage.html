@@ -65,6 +65,7 @@
   <div id="output"></div>
   <!-- 由于llqrcode.js中写死了id，所以id必须为qr-canvas -->
   <div id="video_bg" class="video_bg">
+    <a id="close_qr" href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">图标</a>
     <div class="video_wrap">
       <video id="video" muted autoplay playsinline></video>
       <p class="scanning"></p>
@@ -76,6 +77,10 @@
   <script src="./js/deQrcode.js"></script>
   <script src="./js/scanCode.js"></script>
   <script src='./js/payMessage.js'></script>
-
+  <script>
+    $('#close_qr').click(function() {
+      $('#video_bg').css('display', 'none')
+    })
+  </script>
 </body>
 </html>
