@@ -146,6 +146,7 @@
       if (!walletVal) return alert('请填写支付钱包地址')
       if (!transactionVal) return alert('请填写区块链交易ID')
       // 此处可以提交数据了 然后在跳转页面
+      window.location.href = './paySuccess.html'
     })
 
     $('#close_qr').click(function() {
