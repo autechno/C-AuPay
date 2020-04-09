@@ -12,13 +12,13 @@
   position: relative;
 }
 .form_i .ui-input-text {
-  width: 78%;
+  width: 76%;
   margin: 0 2% 0 0;
 }
 .form_i .form_i_txt {
   white-space: nowrap;
   color: #333;
-  width: 18%;
+  width: 20%;
 }
 .form_i_txt {
   display: flex;
