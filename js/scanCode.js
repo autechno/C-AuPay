@@ -109,7 +109,6 @@ const Scan = {
     let devices = navigator.mediaDevices.enumerateDevices().then(that.gotDevices.bind(that))
     
     if (document.querySelector('#wallet_qr') && document.querySelector('#trading_qr')) {
-      console.log('进入了充值页面元素')
       document.querySelector('#wallet_qr').addEventListener('click', () => {
         clickInit(that, devices, 'wallet_address')
       })
