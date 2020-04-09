@@ -108,17 +108,22 @@ const Scan = {
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices()) return console.log('该设备不支持，或协议不是https')
     let devices = navigator.mediaDevices.enumerateDevices().then(that.gotDevices.bind(that))
     
-    document.querySelector('#wallet_qr').addEventListener('click', () => {
-      clickInit(that, devices, 'wallet_address')
-    })
-    
-    document.querySelector('#trading_qr').addEventListener('click', () => {
-      clickInit(that, devices, 'transaction_id')
-    })
+    if (document.querySelector('#wallet_qr') || document.querySelector('#trading_qr')) {
+      document.querySelector('#wallet_qr').addEventListener('click', () => {
+        clickInit(that, devices, 'wallet_address')
+      })
+      
+      document.querySelector('#trading_qr').addEventListener('click', () => {
+        clickInit(that, devices, 'transaction_id')
+      })
+    }
+
     // 提币页面二维码
-    document.querySelector('#draw_address_qr').addEventListener('click', () => {
-      clickInit(that, devices, 'draw_address')
-    })
+    if (document.querySelector('#draw_address_qr')) {
+      document.querySelector('#draw_address_qr').addEventListener('click', () => {
+        clickInit(that, devices, 'draw_address')
+      })
+    }
   }
 }
 Scan.init()
