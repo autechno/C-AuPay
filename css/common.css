@@ -70,3 +70,9 @@ img {
   font-size: 18px;
   cursor: pointer;
 }
+.common_bg {
+  background: #eee;
+  width: 100%;
+  padding: 5%;
+  border-radius: 15px;
+}

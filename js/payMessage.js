@@ -6,9 +6,9 @@ $(function() {
   $('#numTxt').html(paramsData.num)
 })
 // 离开页面提示
-window.onbeforeunload=function(e){
+window.onbeforeunload = function(e){
 　　var e = window.event || e
-  e.returnValue=('如果您正在进行充值，为了您的资产安全，请勿离开此页面')
+  e.returnValue = ('如果您正在进行充值，为了您的资产安全，请勿离开此页面')
 }
 // 返回上一页按钮
 $('#back').click(function() {

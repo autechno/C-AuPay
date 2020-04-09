@@ -12,10 +12,80 @@
   <link rel="stylesheet" href="./css//jquery.mobile.css">
   <script src="./js/jquery.js"></script>
   <script src="./js/jquery.mobile.js"></script>
+
+  <style>
+    .pay_data li {
+      display: flex;
+      margin-bottom: 5%;
+    }
+    .pay_data li p {
+      margin-right: 5px;
+      white-space: nowrap;
+    }
+    .pay_data li span {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: brown;
+    }
+    .prompt {
+      font-size: 14px;
+      color: #c8c7c7;
+      padding: 0 1%;
+      margin-top: 3%;
+    }
+    .back_home {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 2%;
+    }
+    .back_home i {
+      font-style: inherit;
+    }
+  </style>
 </head>
 <body>
   <div data-role="page">
-      <h1>我是成功页面啦</h1>
+    <div class="w">
+      <div class="common_head">
+        <p>支付成功</p>
+      </div>
+      <div class="common_bg">
+        <ul class="pay_data">
+          <li><p>支付信息:</p><span>啦啦啦啦啦</span></li>
+          <li><p>支付信息:</p><span>2020/08/08 08:08:08</span></li>
+          <li><p>支付钱包地址:</p><span>48948438fjfj3939838</span></li>
+          <li><p>收款钱包地址:</p><span>48948438fjfj3939838</span></li>
+          <li><p>区块链ID:</p><span>48948438fjfj3939838</span></li>
+          <li><p>充值币种:</p><span>EHT</span></li>
+          <li><p>充值数量:</p><span>10</span></li>
+          <li><p>到账游戏金额:</p><span>88888.00</span></li>
+        </ul>
+      </div>
+      <p class="prompt">温馨提示：加速处理中，预计到账时间1-15分钟，如果超过15分钟，请及时联系客服</p>
+      <button id="pay_complete" type="button" class="common_button" data-role='none' style="margin-top: 8%;">立即返回</button>
+      <p class="back_home">(<i id="time">5</i>) 秒后返回充值页面...</p>
+    </div>
   </div>
+
+  <script>
+    $(function() {
+      var time = 5
+      var times = null
+      window.clearInterval(times)
+      times = setInterval(function() {
+        if (time < 1) {
+          clearInterval(times)
+          document.location.href = './index.html'
+          return
+        }
+        $('#time').html(time)
+        time --
+      }, 1000)
+    })
+    $('#pay_complete').click(function() {
+      document.location.href = './index.html'
+    })
+  </script>
 </body>
 </html>

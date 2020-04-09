@@ -32,7 +32,7 @@
         <a id="wallet_qr_pc" href="#wallet_qr_popup" data-rel="popup" data-position-to="window" data-transition="pop" class="common_blue">二维码</a>
       </div>
       <!--  支付信息确认-->
-      <div class="pay_message_confirm pay_bg">
+      <div class="pay_message_confirm common_bg">
         <p class="pay_message_confirm_tit">支付信息确认</p>
         <ul>
           <li><p>充值链:</p><span id="chainTxt"></span></li>
@@ -41,7 +41,7 @@
         </ul>
       </div>
       <!--  充值地址-->
-      <div class="deposit_address pay_bg">
+      <div class="deposit_address common_bg">
         <h2>充值地址</h2>
         <img src="./img/qr.png" alt="二维码">
         <p id="pay_time"></p>
@@ -146,6 +146,7 @@
       if (!walletVal) return alert('请填写支付钱包地址')
       if (!transactionVal) return alert('请填写区块链交易ID')
       // 此处可以提交数据了 然后在跳转页面
+      window.onbeforeunload = null
       window.location.href = './paySuccess.html'
     })
 
