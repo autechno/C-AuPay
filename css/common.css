@@ -8,13 +8,16 @@ ul, li {
   list-style: none;
 }
 a {
-  text-decoration: none;
+  text-decoration: none !important;
   color: inherit !important;
 }
 img {
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
+}
+i {
+  font-style: inherit;
 }
 
 .w {
@@ -46,7 +49,10 @@ img {
 }
 
 .common_blue {
-  color: #569c9c;
+  color: #569c9c !important;
+}
+.common_gray {
+  color: #c8c7c7 !important;
 }
 .common_input {
   width: 80%;

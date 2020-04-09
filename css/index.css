@@ -20,6 +20,10 @@
   color: #333;
   width: 18%;
 }
+.form_i_txt {
+  display: flex;
+  align-items: center;
+}
 .form_i .form_i_txt a {
   font-weight: initial !important;
   text-decoration: underline;
@@ -33,7 +37,7 @@
   font-size: 12px;
   display: none;
 }
-.form_i, .form_i_c {
+.form_i_c {
   justify-content: center;
 }
 .form_i_radio {
@@ -68,4 +72,38 @@
   padding: 2%;
   margin-right: 3%;
   cursor: pointer;
+}
+
+
+/*  提币页面差异*/
+.common_gray {
+  font-size: 14px;
+}
+.draw_chain p {
+  margin-bottom: 2%;
+}
+.draw_chain p i {
+  border: 1px solid #569c9c;
+  padding: 1%;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.draw_chain span {
+  font-size: 14px;
+}
+#draw_address_qr {
+  display: none;
+}
+#draw_address_qr_pc {
+  display: none;
+}
+@media(max-width: 480px) {
+  #draw_address_qr {
+    display: block;
+  }
+}
+@media(min-width: 481px) {
+  #draw_address_qr_pc {
+    display: block;
+  }
 }

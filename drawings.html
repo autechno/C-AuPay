@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+  <title>Document</title>
+
+  <!--  公-->
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/jui.css">
+  <link rel="stylesheet" href="./css//jquery.mobile.css">
+  <script src="./js/jquery.js"></script>
+  <script src="./js/jquery.mobile.js"></script>
+  <!--  私-->
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./css//payMessage.css">
+  <style>
+    
+  </style>
+</head>
+<body>
+  <div data-role="page">
+    <div class="w">
+      <h1 class="logo">AuPay</h1>
+      <form action="">
+        <div class="form_i">
+          <input id="draw_money" class="common_input" data-role='none' type="number" placeholder="提款金额">
+          <div class="form_i_txt"><p>CNY</p></div>
+          <span class="error_prompt">请输入提款金额</span>
+        </div>
+        <div class="form_i">
+          <div class="draw_chain">
+            <p>提币公链：<i>OMNI</i></p>
+            <span class="common_gray">温馨提示：OMNI预计到账时间5秒~5分钟</span>
+          </div>
+        </div>
+        <div class="form_i">
+          <input id="draw_num" class="common_input" data-role='none' type="number" placeholder="提币数量">
+          <div class="form_i_txt">
+            <p>USDT</p>
+            <a href="#popupInfo" data-rel="popup" data-transition="pop" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" title="提币统一以USDT支付，不支持选择其他币种">提币统一以USDT支付，不支持选择其他币种</a>
+          </div>
+          <span class="error_prompt">请输入提币数量</span>
+        </div>
+        <div class="form_i">
+          <input id="draw_address" class="common_input" data-role='none' type="text" placeholder="提币地址">
+          <div class="form_i_txt">
+            <a id="draw_address_qr" class="common_blue">二维码</a>
+            <a id="draw_address_qr_pc" href="#draw_address_qr_popup" data-rel="popup" data-position-to="window" data-transition="pop" class="common_blue">
+              二维码
+            </a>
+          </div>
+          <span class="error_prompt">请检查提币公链与提币地址信息</span>
+        </div>
+      </form>
+      <button type="button" class="common_button nextStep" data-role='none'>确认提币</button>
+    </div>
+
+    <!--  扫码相关-->
+    <div id="output"></div>
+    <div id="video_bg" class="video_bg">
+      <a id="close_qr" href="#" class="ui-btn ui-corner-all ui-icon-delete ui-btn-icon-notext">图标</a>
+      <div class="video_wrap">
+        <video id="video" muted autoplay playsinline></video>
+        <p class="scanning"></p>
+      </div>
+    </div>
+    <canvas id="qr-canvas" style="display:none;"></canvas>
+
+    <!--  提币地址二维码弹窗-->
+    <div id="draw_address_qr_popup" data-role="popup" data-history="false">
+      <img id="draw_address_qr_img" src="" alt="二维码" style="width: 260px;">
+    </div>
+
+    <!--  提币为usdt注释-->
+    <div data-role="popup" id="popupInfo" class="ui-content" data-theme="a">
+      <p>提币统一以USDT支付，不支持选择其他币种</p>
+    </div>
+  
+  </div>
+  <script src="./js/deQrcode.js"></script>
+  <script src="./js/scanCode.js"></script>
+  <script src="js/drawings.js"></script>
+  <script>
+    // pc 扫码一系列
+    $('#draw_address_qr_pc').click(function() {
+      scoketQr('#draw_address_qr_img' , '#draw_address')
+    })
+    function scoketQr(imgId, inputId) {
+      $.ajax({
+        type: 'GET',
+        url: 'http://192.168.50.162:8086/api/websocket/textpass',
+        success: function(result) {
+          var ws = result.data.wsurl
+          $(imgId).attr('src', result.data.qrcode)
+          websocket = new WebSocket(ws)
+          websocket.onmessage = function (ev) {
+            if(ev.data !== '连接成功') $(inputId).val(ev.data)
+          }
+        },
+        error: function(e){
+          console.log(e, 'oneerr')
+        }
+      })
+    }
+  </script>
+</body>
+</html>

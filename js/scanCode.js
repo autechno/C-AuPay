@@ -115,6 +115,10 @@ const Scan = {
     document.querySelector('#trading_qr').addEventListener('click', () => {
       clickInit(that, devices, 'transaction_id')
     })
+    // 提币页面二维码
+    document.querySelector('#draw_address_qr').addEventListener('click', () => {
+      clickInit(that, devices, 'draw_address')
+    })
   }
 }
 Scan.init()

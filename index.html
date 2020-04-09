@@ -36,6 +36,7 @@
           <input id="payNum" class="common_input" data-role='none' type="number" placeholder="支付数量">
           <div class="form_i_txt">
             <p>ETH</p>
+            <a href="#popupInfo" data-rel="popup" data-transition="pop" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" title="根据火币交易所最近5分钟的平均汇率得出">根据火币交易所最近5分钟的平均汇率得出</a>
           </div>
           <span class="error_prompt">请选择支付数量</span>
         </div>
@@ -63,6 +64,11 @@
         <p style="margin-top: 10%;">选择币种</p>
         <ul id="popCoinList"></ul>
       </div>
+    </div>
+
+    <!--  支付数量注释-->
+    <div data-role="popup" id="popupInfo" class="ui-content" data-theme="a">
+      <p>根据火币交易所最近5分钟的平均汇率得出</p>
     </div>
   </div>
   <script src="js/index.js"></script>
