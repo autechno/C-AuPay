@@ -108,11 +108,10 @@ const Scan = {
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices()) return console.log('该设备不支持，或协议不是https')
     let devices = navigator.mediaDevices.enumerateDevices().then(that.gotDevices.bind(that))
     
-    if (document.querySelector('#wallet_qr') || document.querySelector('#trading_qr')) {
+    if (document.querySelector('#wallet_qr') && document.querySelector('#trading_qr')) {
       document.querySelector('#wallet_qr').addEventListener('click', () => {
         clickInit(that, devices, 'wallet_address')
       })
-      
       document.querySelector('#trading_qr').addEventListener('click', () => {
         clickInit(that, devices, 'transaction_id')
       })
