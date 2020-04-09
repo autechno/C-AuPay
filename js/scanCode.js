@@ -158,3 +158,4 @@ function clickInit(that, devices, id) {
     }
   }
 }
+

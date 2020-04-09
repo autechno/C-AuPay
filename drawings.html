@@ -107,6 +107,11 @@
   
     $('#close_qr').click(function() {
       $('#video_bg').css('display', 'none')
+      if (window.stream) {
+        window.stream.getTracks().forEach((track) => {
+          track.stop()
+        })
+      }
     })
   </script>
 </body>
