@@ -1,0 +1,6 @@
+index.html // 充值第一个页面
+payMessage.html // 充值第二个页面
+paySuccess.html // 充值第三个页面
+
+payMessage.html // 提款第一个页面
+paySuccess.html // 提款第二个页面

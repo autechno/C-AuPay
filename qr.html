@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+	<title>AuPay 扫码</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		.w {
+			width: 100%;
+			padding: 15% 15px 0;
+			max-width: 480px;
+			margin: 0 auto;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		h1 {
+			color: #569c9c;
+			margin: 0;
+		}
+		p {
+			font-size: 14px;
+			margin: 5% 0;
+		}
+		textarea {
+			border: 1px solid #eee;
+			min-height: 150px;
+			padding: 5px;
+			width: 100% !important;
+		}
+		button {
+			display: block;
+			margin: 18% auto 0;
+			width: 65%;
+			height: 40px;
+			background: #569c9c;
+			border: none;
+			border-radius: 15px;
+			color: white;
+			font-size: 18px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="w">
+		<h1>AuPay</h1>
+		<p>请在下方输入您的充币钱包地址</p>
+		<textarea id="address" placeholder="为了快速到账，请把充币地址粘贴到此处，平台承诺次地址仅供验证平台交易信息使用"></textarea>
+		<button id="submit">确认提交</button>
+	</div>
+	<script>
+		var ws = '[[${url}]]'
+		websocket = new WebSocket(ws)
+		var submit = document.getElementById('submit')
+		submit.onclick = function() {
+			var addressValue = document.getElementById('address').value
+			if (!addressValue) return alert('请输入内容')
+			websocket.send(addressValue)
+		}
+		websocket.onmessage = function (ev) {
+			alert('提示：' + ev.message)
+		}
+	</script>
+</body>
+
+</html>
