@@ -13,9 +13,9 @@
       name: 'OMNI',
       id: 2,
       coinList: [
-        { name: 'ETH', id: '2.1' },
-        { name: 'ETH1', id: '2.2' },
-        { name: 'ETH2', id: '2.3' }
+        { name: 'ETH', id: '2.1', min: 10, max: 500 },
+        { name: 'ETH1', id: '2.2', min: 18, max: 510 },
+        { name: 'ETH2', id: '2.3', min: 109, max: 509 }
       ]
     }
   ]
@@ -97,7 +97,8 @@
       chainCur: chainCur,
       coinCur: chainCur,
       chainTxt: chainTxt,
-      coinTxt: coinTxt
+      coinTxt: coinTxt,
+      type: $('input[name="type_radio"]:checked').val() // 钱包 转币还是交易所住转币
     }
     window.location.href=`./payMessage.html?${JSON.stringify(sendData)}`
   })

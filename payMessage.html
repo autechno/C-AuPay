@@ -24,7 +24,7 @@
         <i id="back"></i>
         <p>支付信息</p>
       </div>
-      <div class="qr_input">
+      <div id="exchange_qr" class="qr_input">
         <input id="wallet_address" class="common_input" data-role='none' type="text" placeholder="支付钱包地址(您用于支付的钱包地址)">
         <!--  手机操作-->
         <a id="wallet_qr" class="common_blue">二维码</a>
@@ -138,17 +138,6 @@
       }
       return '订单有效时间 ' + m + ':' + s
     }
-
-    // 支付完成按钮
-    $('#pay_complete').click(function() {
-      var walletVal = $('#wallet_address').val() // 钱包地址框
-      var transactionVal = $('#transaction_id').val() // 交易id框
-      if (!walletVal) return alert('请填写支付钱包地址')
-      if (!transactionVal) return alert('请填写区块链交易ID')
-      // 此处可以提交数据了 然后在跳转页面
-      window.onbeforeunload = null
-      window.location.href = './paySuccess.html'
-    })
 
     $('#close_qr').click(function() {
       $('#video_bg').css('display', 'none')

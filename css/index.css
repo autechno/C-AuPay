@@ -66,10 +66,21 @@
 .seleCoinPop li.cur {
   border: 1px solid #569c9c;
   color: #569c9c;
+  position: relative;
+}
+.seleCoinPop li.cur::after {
+  content: '';
+  background: url(../img/cur.png) no-repeat;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  background-size: contain;
 }
 .chain_i, .coin_i {
   border: 1px solid #eee;
-  padding: 2%;
+  padding: 3%;
   margin-right: 3%;
   cursor: pointer;
 }
@@ -87,6 +98,17 @@
   padding: 1%;
   border-radius: 5px;
   font-size: 14px;
+  position: relative;
+}
+.draw_chain p i::before {
+  content: '';
+  background: url(../img/cur.png) no-repeat;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  background-size: contain;
 }
 .draw_chain span {
   font-size: 14px;
