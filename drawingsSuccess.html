@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+  <title>Document</title>
+
+  <!--  公-->
+  <link rel="stylesheet" href="./css/common.css">
+  <link rel="stylesheet" href="./css/jui.css">
+  <!-- <link rel="stylesheet" href="./css//jquery.mobile.css"> -->
+  <script src="./js/jquery.js"></script>
+  <!-- <script src="./js/jquery.mobile.js"></script> -->
+  <style>
+    .common_head {
+      margin: 15% 0 5%;
+    }
+    .tip {
+      font-size: 14px;
+      width: 90%;
+      margin: 0 auto;
+    }
+    img {
+      display: block;
+      margin: 0 auto;
+      width: 80px;
+      margin-bottom: 8%;
+    }
+    .back_home {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 1%;
+    }
+  </style>
+  
+</head>
+<body>
+  <div data-role="page">
+    <div class="w">
+      <div class="common_head">
+        <p>支付成功</p>
+      </div>
+      <img src="./img/yes.png" alt="">
+      <p class="tip common_gray">我们已经收到您的提币请求，通常会在1~15分钟之内完成，请您耐心等待。如果超过15分钟，您的数币未到账，请与我们的客服联系。</p>
+      <button type="button" class="common_button nextStep" data-role='none'>立即返回</button>
+      <p class="back_home common_gray">(<i id="time">5</i>) 秒后返回提币页面...</p>
+    </div>
+  </div>
+  <script>
+    $(function() {
+      var time = 5
+      var times = null
+      window.clearInterval(times)
+      times = setInterval(function() {
+        if (time < 1) {
+          clearInterval(times)
+          document.location.href = './drawings.html'
+          return
+        }
+        $('#time').html(time)
+        time --
+      }, 1000)
+    })
+    $('#pay_complete').click(function() {
+      document.location.href = './drawings.html'
+    })
+  </script>
+  
+</body>
+</html>
