@@ -1,7 +1,8 @@
 var paramsData = null
 $(function() {
   // 获取路径传过来的参数
-  paramsData = JSON.parse(window.location.search.slice(1).replace(/%22/g, '"'))
+  // paramsData = JSON.parse(window.location.search.slice(1).replace(/%22/g, '"'))
+  paramsData = JSON.parse(localStorage.getItem('aupay'))
   if (paramsData.type === 'exchange') $('#exchange_qr').hide()
   $('#chainTxt').html(paramsData.chainTxt)
   $('#coinTxt').html(paramsData.coinTxt)

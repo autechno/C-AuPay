@@ -55,15 +55,20 @@
       <!--  支付完成-->
       <button id="pay_complete" type="button" class="common_button" data-role='none' style="margin-top: 8%;">支付完成</button>
     </div>
-  
+    
     <!--  离开的提示弹窗-->
-    <div id="popupDialog" data-role="popup" data-history="false">
+    <div id="popupDialog" class="hint_pop" data-role="popup" data-history="false">
+      <h3 class="hint_pop_tit">提示</h3>
+      <p>如果您正在进行充值，为了您的资产安全，请勿离开此页面</p>
+      <div class="hint_pop_btn"><a data-rel="back">取消</a><a id="leave" class="common_blue" data-rel="back" style="width: 70px;">确认离开</a></div>
+    </div>
+    <!-- <div id="popupDialog" data-role="popup" data-history="false">
       <p>如果您正在进行充值，为了您的资产安全，请勿离开此页面</p>
       <div>
         <a id="leave" data-rel="back">确认离开</a>
         <a data-rel="back">取消</a>
       </div>
-    </div>
+    </div> -->
   
     <!--  钱包地址二维码弹窗-->
     <div id="wallet_qr_popup" data-role="popup" data-history="false">
