@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-	<title>AuPay 扫码</title>
+	<title>auPay 扫码</title>
 	<style>
 		* {
 			box-sizing: border-box;
@@ -50,7 +50,7 @@
 
 <body>
 	<div class="w">
-		<h1>AuPay</h1>
+		<h1>auPay</h1>
 		<p>请在下方输入您的充币钱包地址</p>
 		<textarea id="address" placeholder="为了快速到账，请把充币地址粘贴到此处，平台承诺次地址仅供验证平台交易信息使用"></textarea>
 		<button id="submit">确认提交</button>
@@ -65,7 +65,7 @@
 			websocket.send(addressValue)
 		}
 		websocket.onmessage = function (ev) {
-			alert('提示：' + ev.message)
+			console.log(ev)
 		}
 	</script>
 </body>
