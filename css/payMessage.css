@@ -12,7 +12,7 @@
   margin-bottom: 3%;
 }
 .pay_message_confirm ul {
-  display: flex;
+  /* display: flex; */
   flex-wrap: wrap;
 }
 .pay_message_confirm ul li {
@@ -24,6 +24,7 @@
 .pay_message_confirm ul li p {
   font-size: 14px;
   margin-right: 5px;
+  white-space: nowrap;
 }
 .pay_message_confirm ul li span {
   font-size: 14px;
@@ -37,7 +38,9 @@
 }
 .deposit_address img {
   width: 150px;
-  margin: 3% 0;
+  height: 150px;
+  margin: 3% auto;
+  display: block;
 }
 .deposit_address p {
   font-size: 14px;
@@ -152,4 +155,20 @@
   100% {
     top: 0
   }
+}
+
+.deposit_site_data input{
+  width: 100%;
+  border: none;
+  height: 30px;
+  background: transparent;
+  text-align: center;
+}
+.deposit_site_data button {
+  font-size: 14px;
+  border: 1px solid #eee;
+  width: 50%;
+  line-height: 30px;
+  border-radius: 5px;
+  background: #e0e0e0;
 }

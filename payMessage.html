@@ -34,7 +34,7 @@
       <div class="pay_message_confirm common_bg">
         <p class="pay_message_confirm_tit">支付信息确认</p>
         <ul>
-          <li><p>充值链:</p><span id="chainTxt"></span></li>
+          <!-- <li><p>充值链:</p><span id="chainTxt"></span></li> -->
           <li><p>充值币种:</p><span id="coinTxt"></span></li>
           <li><p>充值数量:</p><span id="numTxt"></span></li>
         </ul>
@@ -42,8 +42,12 @@
       <!--  充值地址-->
       <div class="deposit_address common_bg">
         <h2>充值地址</h2>
-        <img src="./img/qr.png" alt="二维码">
+        <img id="depositImg" src="./img/qr.png" alt="二维码">
         <p id="pay_time"></p>
+        <div class="deposit_site_data">
+          <input id="depositInputImg" data-role="none" type="text" value="777666444443322">
+          <button id="copySite" data-role="none">复制</button>
+        </div>
         <span>(请按照现实数量进行支付，修改数量将无法到账)</span>
       </div>
       <!--  交易id-->
@@ -62,14 +66,6 @@
       <p>如果您正在进行充值，为了您的资产安全，请勿离开此页面</p>
       <div class="hint_pop_btn"><a data-rel="back">取消</a><a id="leave" class="common_blue" data-rel="back" style="width: 70px;">确认离开</a></div>
     </div>
-    <!-- <div id="popupDialog" data-role="popup" data-history="false">
-      <p>如果您正在进行充值，为了您的资产安全，请勿离开此页面</p>
-      <div>
-        <a id="leave" data-rel="back">确认离开</a>
-        <a data-rel="back">取消</a>
-      </div>
-    </div> -->
-  
     <!--  钱包地址二维码弹窗-->
     <div id="wallet_qr_popup" data-role="popup" data-history="false">
       <img id="wallet_qr_img" src="" alt="二维码" style="width: 260px;">
@@ -94,88 +90,89 @@
 <script src="./js/deQrcode.js"></script>
 <script src="./js/scanCode.js"></script>
 <script src='./js/payMessage.js'></script>
-  <script>
-    // 支付倒计时  time(毫秒)
-    var payTimes = null
-    window.clearInterval(payTimes)
-    payTime(1586425475000)
-    function payTime(time) {
-      payTimes = setInterval(function() {
-        if (!time) {
-          $('#pay_time').html('支付超时')
-          clearInterval(payTimes)
-          return
-        }
-        $('#pay_time').html(cumulativeTimeM(time))
-      }, 1000)
+<script>
+  var overdueTime = 1589509804000  // 15号 10点31
+  // 支付倒计时  time(毫秒)
+  var payTimes = null
+  window.clearInterval(payTimes)
+  payTime(overdueTime)
+  function payTime(time) {
+    payTimes = setInterval(function() {
+      if (!time) {
+        $('#pay_time').html('支付超时')
+        clearInterval(payTimes)
+        return
+      }
+      $('#pay_time').html(cumulativeTimeM(time))
+    }, 1000)
+  }
+  // 毫秒转时分
+  function cumulativeTimeM(item) {
+    if (!item) {
+      clearInterval(payTimes)
+      return '支付超时'
     }
-    // 毫秒转时分
-    function cumulativeTimeM(item) {
-      if (!item) {
-        clearInterval(payTimes)
-        return '支付超时'
-      }
-      if (isNaN(item / 1000)) {
-        clearInterval(payTimes)
-        return '支付超时'
-      }
-      if ((item / 1000 - new Date().getTime() / 1000 ) <= 0) {
-        clearInterval(payTimes)
-        return '支付超时'
-      }
-      let m = ''
-      let s = ''
-      const value =  parseInt(item / 1000) - parseInt(new Date().getTime() / 1000)
-      let theTime = parseInt(value) // 秒
-      let middle = 0 // 分
-      if (theTime > 60) {
-        middle = parseInt(theTime / 60)
-        theTime = parseInt(theTime % 60)
-      }
-      s = parseInt(theTime)
-      m = parseInt(middle)
-      if (Number(s) > 58) {
-        m = String(Number(m) + 1).padStart(2, '0')
-        s = '00'
-      } else {
-        s = String(Number(s) + 1).padStart(2, '0')
-      }
-      return '订单有效时间 ' + m + ':' + s
+    if (isNaN(item / 1000)) {
+      clearInterval(payTimes)
+      return '支付超时'
     }
+    if ((item / 1000 - new Date().getTime() / 1000 ) <= 0) {
+      clearInterval(payTimes)
+      return '支付超时'
+    }
+    let m = ''
+    let s = ''
+    const value =  parseInt(item / 1000) - parseInt(new Date().getTime() / 1000)
+    let theTime = parseInt(value) // 秒
+    let middle = 0 // 分
+    if (theTime > 60) {
+      middle = parseInt(theTime / 60)
+      theTime = parseInt(theTime % 60)
+    }
+    s = parseInt(theTime)
+    m = parseInt(middle)
+    if (Number(s) > 58) {
+      m = String(Number(m) + 1).padStart(2, '0')
+      s = '00'
+    } else {
+      s = String(Number(s) + 1).padStart(2, '0')
+    }
+    return '订单有效时间 ' + m + ':' + s
+  }
 
-    $('#close_qr').click(function() {
-      $('#video_bg').css('display', 'none')
-      if (window.stream) {
-        window.stream.getTracks().forEach((track) => {
-          track.stop()
-        })
-      }
-    })
-
-    // pc 扫码一系列
-    $('#wallet_qr_pc').click(function() {
-      scoketQr('#wallet_qr_img' , '#wallet_address')
-    })
-    $('#trading_qr_pc').click(function() {
-      scoketQr('#trading_qr_img' , '#transaction_id')
-    })
-    function scoketQr(imgId, inputId) {
-      $.ajax({
-        type: 'GET',
-        url: 'http://192.168.50.162:8086/api/websocket/textpass',
-        success: function(result) {
-          var ws = result.data.wsurl
-          $(imgId).attr('src', result.data.qrcode)
-          websocket = new WebSocket(ws)
-          websocket.onmessage = function (ev) {
-            if(ev.data !== '连接成功') $(inputId).val(ev.data)
-          }
-        },
-        error: function(e){
-          console.log(e, 'oneerr')
-        }
+  $('#close_qr').click(function() {
+    $('#video_bg').css('display', 'none')
+    if (window.stream) {
+      window.stream.getTracks().forEach((track) => {
+        track.stop()
       })
     }
-  </script>
+  })
+
+  // pc 扫码一系列
+  $('#wallet_qr_pc').click(function() {
+    scoketQr('#wallet_qr_img' , '#wallet_address')
+  })
+  $('#trading_qr_pc').click(function() {
+    scoketQr('#trading_qr_img' , '#transaction_id')
+  })
+  function scoketQr(imgId, inputId) {
+    $.ajax({
+      type: 'GET',
+      url: 'http://192.168.50.162:8086/api/websocket/textpass',
+      success: function(result) {
+        var ws = result.data.wsurl
+        $(imgId).attr('src', result.data.qrcode)
+        websocket = new WebSocket(ws)
+        websocket.onmessage = function (ev) {
+          if(ev.data !== '连接成功') $(inputId).val(ev.data)
+        }
+      },
+      error: function(e){
+        console.log(e, 'oneerr')
+      }
+    })
+  }
+</script>
 </body>
 </html>

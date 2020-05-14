@@ -51,7 +51,7 @@
 
 /*  选择币弹窗*/
 .seleCoinPop {
-  width: 200px;
+  width: 320px;
   padding-bottom: 5%;
 }
 #popChainList, #popCoinList {
@@ -63,12 +63,12 @@
 .seleCoinPop p {
   margin: 3% 0;
 }
-.seleCoinPop li.cur {
+.seleCoinPop li.cur, .seleCoinPop li:hover {
   border: 1px solid #569c9c;
   color: #569c9c;
   position: relative;
 }
-.seleCoinPop li.cur::after {
+.seleCoinPop li.cur::after, .seleCoinPop li:hover::after {
   content: '';
   background: url(../img/cur.png) no-repeat;
   width: 15px;
@@ -79,10 +79,14 @@
   background-size: contain;
 }
 .chain_i, .coin_i {
+  position: relative;
   border: 1px solid #eee;
   padding: 3%;
   margin-right: 3%;
   cursor: pointer;
+  min-width: 85px;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 

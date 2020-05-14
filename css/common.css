@@ -19,6 +19,12 @@ img {
 i {
   font-style: inherit;
 }
+button {
+  outline: none;
+}
+input {
+  outline: none;
+}
 
 .w {
   width: 100%;

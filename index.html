@@ -20,7 +20,7 @@
       <h1 class="logo">auPay</h1>
       <form>
         <div class="form_i">
-          <input id="depositMoney" class="common_input" data-role='none' type="number" placeholder="请输入充值金额">
+          <input id="depositMoney" class="common_input" data-role='none' type="number" placeholder="请输入充值金额" readonly>
           <div class="form_i_txt"><p>CNY</p></div>
           <span class="error_prompt">请选择充值金额</span>
         </div>
@@ -32,14 +32,15 @@
           <span class="error_prompt">请选择币种</span>
         </div>
         <div class="form_i">
-          <input id="payNum" class="common_input" data-role='none' type="number" placeholder="支付数量">
+          <input id="payNum" class="common_input" data-role='none' type="number" placeholder="支付数量" readonly>
           <div class="form_i_txt">
-            <p>ETH</p>
-            <a href="#popupInfo" data-rel="popup" data-transition="pop" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" title="根据火币交易所最近5分钟的平均汇率得出">根据火币交易所最近5分钟的平均汇率得出</a>
+            <p style="white-space: initial;color: #a7a7a7;" id="seleCoinTxt" data-rel="popup" data-transition="pop" title="根据火币交易所最近5分钟的平均汇率得出"></p>
+            <!-- <a href="#popupInfo" data-rel="popup" data-transition="pop" class="ui-btn ui-corner-all ui-icon-info ui-btn-icon-notext" title="根据火币交易所最近5分钟的平均汇率得出">根据火币交易所最近5分钟的平均汇率得出</a> -->
           </div>
-          <span class="error_prompt">请选择支付数量</span>
+          <span style="display: inline-block;color:#a7a7a7;" class="error_prompt">根据火币交易所最近5分钟的平均汇率得出</span>
+          <span class="error_prompt">请等待获取支付数量</span>
         </div>
-        <div class="form_i form_i_c">
+        <div style="margin-top: 10%;" class="form_i form_i_c">
           <label class="form_i_radio">
             <input data-role='none' type="radio" name="type_radio" value="wallet">
             <span>钱包转币</span>
@@ -51,7 +52,7 @@
           <span class="error_prompt">请选择转币方式</span>
         </div>
       </form>
-      <button type="button" class="common_button nextStep" data-role='none'>下一步</button>
+      <button type="submit" class="common_button nextStep" data-role='none'>下一步</button>
     </div>
   
     <!--  选择币种列表-->
@@ -60,7 +61,7 @@
       <div class="seleCoinPop">
         <p style="margin-top: 10%;">选择币种</p>
         <ul id="popCoinList"></ul>
-        <p>选择公链</p>
+        <p style="display: none;">选择公链</p>
         <ul id="popChainList"></ul>
       </div>
     </div>
