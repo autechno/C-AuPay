@@ -23,10 +23,12 @@ var currencyList =  []
 var coinCur = null, coinTxt = null, coinId = null, currencyChain = null
 $('#depositMoney').val(depositMoney)
 // 获取充值渠道
+// $.mobile.loading('show')
 $.ajax({
   type: 'GET',
   url: getPaymentChannel + '?merchantId=' + merchantId,
   success: function(res) {
+    $.mobile.loading('hide')
     console.log(res, '充值渠道')
     if (res.code === 200) {
       currencyList = res.data
@@ -38,7 +40,8 @@ $.ajax({
       }
       $('#popCoinList').html(tempHtml)
     } else { currencyList = [] }
-  }
+  },
+  error: function() { $.mobile.loading('hide') }
 })
 // 通过币种id获取到币种的name
 function channerlIdGetName(id) {
@@ -94,6 +97,7 @@ $(document).on('click', '.coin_i', function() {
   depositMoneyGetPayNum()
 })
 function depositMoneyGetPayNum() {
+  $.mobile.loading('show')
   $.ajax({
     type: 'GET',
     url: getPaymentCoin,
@@ -103,11 +107,13 @@ function depositMoneyGetPayNum() {
       currencyChain
     },
     success: function(res) {
+      $.mobile.loading('hide')
       if (res.code === 200) {
         $('#payNum').val(res.data)
       }
       console.log(res, '获取支付数量')
-    }
+    },
+    err: function() { $.mobile.loading('hide') }
   })
 }
 // 下一步
@@ -133,6 +139,7 @@ $('.nextStep').click(function() {
 
 // 获取支付二维码等信息
 function choosePaymentChannel() {
+  $.mobile.loading('show')
   $.ajax({
     type: 'GET',
     url: choosePaymentChannelApi,
@@ -143,13 +150,11 @@ function choosePaymentChannel() {
       paymentChannelId: coinCur
     },
     success: function(res) {
+      $.mobile.loading('hide')
       document.write(res)
       document.close()
-      // document.close()
-      // document.write('')
-      // document.body.innerHTML = res
-      // $(document.body).html(res);
-    }
+    },
+    error: function() { $.mobile.loading('hide') }
   })
 }
 

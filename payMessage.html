@@ -46,7 +46,7 @@
         <p id="pay_time"></p>
         <div class="deposit_site_data">
           <input id="depositInputImg" data-role="none" type="text" value="777666444443322">
-          <button id="copySite" data-role="none">复制</button>
+          <button id="copySite" data-role="none">复制地址</button>
         </div>
         <span>(请按照现实数量进行支付，修改数量将无法到账)</span>
       </div>
@@ -74,6 +74,11 @@
     <!--  钱包地址二维码弹窗-->
     <div id="trading_qr_popup" data-role="popup" data-history="false">
       <img id="trading_qr_img" src="" alt="二维码" style="width: 260px;">
+    </div>
+
+    <!--  已复制提示弹窗-->
+    <div data-role="popup" id="copyOk" class="ui-content" data-theme="a">
+      <p>已复制</p>
     </div>
   
     <!--  扫码相关-->

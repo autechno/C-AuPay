@@ -14,6 +14,7 @@ $(function() {
 
 // 支付完成按钮
 $('#pay_complete').click(function() {
+  $.mobile.loading('show')
   var walletVal = $('#wallet_address').val() // 钱包地址框
   var transactionVal = $('#transaction_id').val() // 交易id框
   if (!walletVal && paramsData.type !== 'exchange') return alert('请填写支付钱包地址')
@@ -25,7 +26,11 @@ $('#pay_complete').click(function() {
       chainTxId: transactionVal
     },
     success: function(res) {
+      $.mobile.loading('hide')
       console.log(res, '充值结束')
+    },
+    error: function(err) {
+      $.mobile.loading('hide')
     }
   })
   // 此处可以提交数据了 然后在跳转页面
@@ -50,5 +55,6 @@ $('#leave').click(function() {
 $('#copySite').click(function() {
   $('#depositInputImg').select()
   document.execCommand("copy")
-  alert('已复制')
+  $("#copyOk").popup('open')
+  setTimeout(function() { $("#copyOk").popup('close') }, 1000)
 })
