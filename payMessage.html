@@ -105,6 +105,7 @@
     payTimes = setInterval(function() {
       if (!time) {
         $('#pay_time').html('支付超时')
+        $('#depositImg').attr('src', '')
         clearInterval(payTimes)
         return
       }
@@ -115,14 +116,17 @@
   function cumulativeTimeM(item) {
     if (!item) {
       clearInterval(payTimes)
+      $('#depositImg').attr('src', '')
       return '支付超时'
     }
     if (isNaN(item / 1000)) {
       clearInterval(payTimes)
+      $('#depositImg').attr('src', '')
       return '支付超时'
     }
     if ((item / 1000 - new Date().getTime() / 1000 ) <= 0) {
       clearInterval(payTimes)
+      $('#depositImg').attr('src', '')
       return '支付超时'
     }
     let m = ''

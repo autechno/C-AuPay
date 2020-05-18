@@ -13,8 +13,15 @@ $(document).ready(function(){
     $('#popupContinuePop').popup('open')
   }
   $('#continueBtn').click(function() {
-    window.location.href = './payMessage.html'
+    // window.location.href = './payMessage.html'
+    let data = JSON.parse(localStorage.getItem('aupay'))
+    token = data.token
+    paymentOrderId = data.paymentOrderId,
+    coinCur = data.coinCur
+    againChoosePaymentChannel()
   })
+  // 取消按钮
+  $('#cancelBtn').click(function() { localStorage.removeItem('aupay') })
 })
 
 // 公链和币种数据
@@ -123,17 +130,6 @@ $('.nextStep').click(function() {
   if (!coinCur) return $('.form_i .error_prompt').eq(1).css('display', 'block')
   if (!$('#payNum').val()) return $('.form_i .error_prompt').eq(3).css('display', 'block')
   if (!$('input[name="type_radio"]:checked').val()) return $('.form_i .error_prompt').eq(3).css('display', 'block')
-  const sendData = {
-    money: $('#depositMoney').val(),
-    num: $('#payNum').val(),
-    coinCur: coinCur,
-    coinTxt: coinTxt,
-    type: $('input[name="type_radio"]:checked').val() // 钱包 转币还是交易所住转币
-  }
-  // 下一步的同时把数据存储到缓存中
-  localStorage.removeItem('aupay')
-  localStorage.setItem('aupay', JSON.stringify(sendData))
-  // window.location.href = './payMessage.html'
   choosePaymentChannel()
 })
 
@@ -143,13 +139,49 @@ function choosePaymentChannel() {
   $.ajax({
     type: 'GET',
     url: choosePaymentChannelApi,
-    headers:{'Content-Type':'application/json;charset=utf8','token':token},
+    headers:{'Content-Type': 'application/json;charset=utf8','token': token},
     'dataType' :'html', 
     data: {
       paymentOrderId,
       paymentChannelId: coinCur
     },
     success: function(res) {
+      // 成功后把信息存到 浏览器中
+      let storageData = {
+        token,
+        paymentOrderId,
+        paymentChannelId: coinCur
+      }
+      localStorage.removeItem('aupay')
+      localStorage.setItem('aupay', JSON.stringify(storageData))
+      $.mobile.loading('hide')
+      document.write(res)
+      document.close()
+    },
+    error: function() { $.mobile.loading('hide') }
+  })
+}
+// 异常退出后获取支付二维码等信息
+function againChoosePaymentChannel() {
+  $.mobile.loading('show')
+  $.ajax({
+    type: 'GET',
+    url: mainApi + '/exceptionReturn',
+    headers:{'Content-Type': 'application/json;charset=utf8','token': token},
+    'dataType' :'html', 
+    data: {
+      paymentOrderId,
+      paymentChannelId: coinCur
+    },
+    success: function(res) {
+      // 成功后把信息存到 浏览器中
+      let storageData = {
+        token,
+        paymentOrderId,
+        paymentChannelId: coinCur
+      }
+      localStorage.removeItem('aupay')
+      localStorage.setItem('aupay', JSON.stringify(storageData))
       $.mobile.loading('hide')
       document.write(res)
       document.close()

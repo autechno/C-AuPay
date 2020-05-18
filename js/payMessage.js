@@ -2,16 +2,6 @@ const mainApi = 'http://192.168.50.162:8086/api/payment/'
 const getPaymentChannel = mainApi + 'finishPayment' // 支付完成接口
 var paramsData = null
 
-$(function() {
-  paramsData = JSON.parse(localStorage.getItem('aupay')) || {}
-  if (paramsData && paramsData.type === 'exchange') $('#exchange_qr').hide()
-  // $('#chainTxt').html(paramsData.chainTxt)
-  if (paramsData) {
-    $('#coinTxt').html(paramsData.coinTxt)
-    $('#numTxt').html(paramsData.num)
-  }
-})
-
 // 支付完成按钮
 $('#pay_complete').click(function() {
   $.mobile.loading('show')
