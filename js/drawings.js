@@ -1,16 +1,32 @@
+  const deawingsMoney = 500 // 提款金额
+  const deawingsCurrencyNum = 30 // 提币数量
+  const drawOrderId = null
+  const drawingsToken = null
 
+
+  $('#draw_money').val(deawingsMoney)
+  $('#draw_num').val(deawingsCurrencyNum)
   // 下一步
   $('.nextStep').click(function() {
-    if (!$('#draw_money').val()) return $('.form_i .error_prompt').eq(0).css('display', 'block')
-    if (!$('#draw_num').val()) return $('.form_i .error_prompt').eq(1).css('display', 'block')
     if (!$('#draw_address').val()) return $('.form_i .error_prompt').eq(2).css('display', 'block')
     const sendData = {
-      money: $('#draw_money').val(),
-      num: $('#draw_num').val(),
+      drawOrderId: drawOrderId,
+      drawChannelId: 1,
       address: $('#draw_address').val()
     }
+    $.ajax({
+      type: 'GET',
+      url: 'http://aupay.one/api/payment/submitDraw',
+      headers:{'Content-Type': 'application/json;charset=utf8','token': drawingsToken},
+      success: function(res) {
+        console.log(res, '下一步返回')
+      },
+      error: function(e){
+        console.log(e, 'oneerr')
+      }
+    })
     console.log(sendData)
-    window.location.href=`./drawingsSuccess.html`
+    // window.location.href=`./drawingsSuccess.html`
   })
 
   $('.form_i input').bind('input propertychange', function(e) {
